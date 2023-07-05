@@ -1,7 +1,7 @@
 import 'package:practice/Chat.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:math';
+import 'dart:math' as math;
 
 class ChatsPage extends StatelessWidget {
   final List<Chat> chats;
@@ -51,7 +51,12 @@ class ChatsPage extends StatelessWidget {
                 children: [Container(
                   decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: getGradient(),),),
+                  gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: <Color>[
+                            Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
+                            Colors.white,],),),),
                   Text(chats[index].userName.substring(0, 1).toUpperCase(),
                   style: TextStyle(
                   fontSize: 30,
@@ -81,14 +86,4 @@ class ChatsPage extends StatelessWidget {
         })
     );
   }
-  LinearGradient getGradient(){
-      Color color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
-      Color white = Colors.white;
-      return LinearGradient(
-         colors: [color, white],
-         stops:  [0.0, 1.0],
-         begin: Alignment.bottomCenter,
-         end: Alignment.topCenter,
-  );
-    }
 }
