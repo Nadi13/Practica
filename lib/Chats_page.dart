@@ -27,29 +27,36 @@ class ChatsPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Color(0xff55879F),
-        leading: Icon(Icons.menu),
-        title: Text("Chats"),
+        leading:Icon(Icons.menu),
+        title: Text("Telegram"),
         actions: [
             Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: Icon(Icons.search,size: 30))
-        ],
-      ),
+                padding: EdgeInsets.only(right: 16),
+                child: IconButton(
+                icon: Icon(Icons.search, size: 30),
+                onPressed: () {},),)],),
       body: ListView.builder(
         itemCount: chats.length,
         itemBuilder: (BuildContext context, int index){
           if(chats[index].lastMessage == null){
             return Container();}
           return ListTile(
-            contentPadding: EdgeInsets.only(top:10, left:10),
+            contentPadding: EdgeInsets.only(top:10, left:10, right: 10),
             title: Text(chats[index].userName, style:TextStyle(fontSize: 22)),
-            subtitle: Text(chats[index].lastMessage.toString(), style:TextStyle(fontSize: 17)),
+            subtitle: Text(chats[index].lastMessage.toString(), style:TextStyle(fontSize: 17), overflow: TextOverflow.ellipsis),
             leading: CircleAvatar(radius: 30,
               backgroundImage: chats[index].userAvatar != null ? AssetImage(chats[index].userAvatar.toString()): null,
-              child: chats[index].userAvatar == null ? Container(
-                decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: getGradient(),)): null),
+              child: chats[index].userAvatar == null ? Stack(
+                alignment: Alignment.center,
+                children: [Container(
+                  decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: getGradient(),),),
+                  Text(chats[index].userName.substring(0, 1).toUpperCase(),
+                  style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,),),],): null),
             trailing: Text(formatDate(chats[index].date!), style:TextStyle(fontSize: 17)), );
         })
     );

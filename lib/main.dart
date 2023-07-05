@@ -16,5 +16,16 @@ Future<List<Chat>> _loadChatList() async {
       jsonDecode(await rootBundle.loadString('assets/bootcamp/bootcamp.json'));
   for (final item in rawData['data']) {
     result.add(Chat.fromJson(item));}
+  result.sort((a, b) {
+    if (a.date == null && b.date == null) {
+      return 0;
+    } else if (a.date == null) {
+      return 1;
+    } else if (b.date == null) {
+      return -1;
+    } else {
+      return b.date!.compareTo(a.date!);
+    }
+  });
   return result;
 }
