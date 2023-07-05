@@ -57,7 +57,27 @@ class ChatsPage extends StatelessWidget {
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,),),],): null),
-            trailing: Text(formatDate(chats[index].date!), style:TextStyle(fontSize: 17)), );
+            trailing: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [Text(
+                formatDate(chats[index].date!),
+                style: TextStyle(fontSize: 17),),
+                SizedBox(height: 5),
+              if(chats[index].countUnreadMessages > 0)
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    shape: BoxShape.circle,),
+                  child: Center(
+                    child: Text(
+                    chats[index].countUnreadMessages.toString(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      ),),),),],),
+             );
         })
     );
   }
