@@ -2,6 +2,7 @@ import 'package:practice/Chat.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
+import 'package:practice/SearchPage.dart';
 
 class ChatsPage extends StatelessWidget {
   final List<Chat> chats;
@@ -33,8 +34,10 @@ class ChatsPage extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(right: 16),
                 child: IconButton(
-                icon: Icon(Icons.search, size: 30),
-                onPressed: () {},),)],),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => SearchPage(chats: chats)));},
+                icon: Icon(Icons.search, size: 30),),)],),
       body: ListView.builder(
         itemCount: chats.length,
         itemBuilder: (BuildContext context, int index){
@@ -86,4 +89,5 @@ class ChatsPage extends StatelessWidget {
         })
     );
   }
+
 }
